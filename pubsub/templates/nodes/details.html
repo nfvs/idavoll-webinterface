@@ -15,7 +15,8 @@
 		<dt>Collection</dt>
 			<dd>
 				{% if node.collection.name %}
-					{{ node.collection.name }}
+					{% url pubsub.views.nodes.details node.collection.node_id as col_url %}
+					<a href="{{ col_url }}">{{ node.collection.name }}</a>
 				{% else %}
 					No Collection (Root Node)
 				{% endif%}

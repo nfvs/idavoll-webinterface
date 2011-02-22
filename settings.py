@@ -57,10 +57,21 @@ TEMPLATE_LOADERS = (
 #     'django.template.loaders.eggs.load_template_source',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.core.context_processors.auth", 
+    "django.core.context_processors.debug", 
+    "django.core.context_processors.i18n", 
+    "django.core.context_processors.media", 
+    "django.core.context_processors.request", 
+)
+
+
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    
+    'pagination.middleware.PaginationMiddleware',
 )
 
 ROOT_URLCONF = 'pubsub_web.urls'
@@ -78,6 +89,6 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
 
+    'pagination',
     'pubsub',
 )
-

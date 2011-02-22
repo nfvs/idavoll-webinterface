@@ -1,31 +1,54 @@
 {% extends "base_generic.html" %}
 
+{% load pagination_tags %}
+
 {% block content %}
 <h2>Affiliations</h2>
 
+{% if filters %}
+	<h3>Filters</h3>
+
+	{% for k, v in filters.items %}
+		<h4>{{ k }}: {{ v }}</h4>
+	{% endfor %}
+
+	{% url pubsub.views.affiliations.index as remove %}
+	<a href="{{ remove }}">Remove Filters</a><br /><br />
+{% endif %}
 
 <table>
 	<tr>
 		<th>Entity</th>
 		<th>Node</th>
 		<th>Affiliation</th>
+		<th width=100>Filter By</th>
 	</tr>
 
-{% for a in paginator.object_list  %}
+{% autopaginate affiliations %}
+{% for a in affiliations  %}
+
 	{% url pubsub.views.entities.details a.entity.entity_id as entity_url %}
 	{% url pubsub.views.nodes.details a.node.node_id as node_url %}
-	
+	{% url pubsub.views.affiliations.index as affs_url %}
 	<tr>
 		<td><a href="{{ entity_url }}">{{ a.entity.jid }}</a></td>
 		<td><a href="{{ node_url }}">{{ a.node.name }}</a></td>
 		<td>{{ a.affiliation }}</td>
+		<td>
+			{% if 'Entity' not in filters %}
+			<a href="{{ affs_url }}?entity={{ a.entity.entity_id }}">Entity</a>
+			{% endif %}
+			{% if 'Node' not in filters %}
+			<a href="{{ affs_url }}?node={{ a.node.node_id }}">Node</a>
+			{% endif %}
+
+		</td>
 	</tr>
 {% endfor %}
 
 </table>
 
-
-{% include "paginator_footer.html"%}
+{% paginate %}
 
 {% endblock %}
 

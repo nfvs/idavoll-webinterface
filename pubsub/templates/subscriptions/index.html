@@ -1,5 +1,7 @@
 {% extends "base_generic.html" %}
 
+{% load pagination_tags %}
+
 {% block content %}
 <h2>Subscriptions</h2>
 
@@ -12,7 +14,7 @@
 <a href="{{ remove }}">Remove Filters</a><br /><br />
 {% endif %}
 
-{% if paginator.object_list %}
+{% if subscriptions %}
 
 <table>
 	<tr>
@@ -22,12 +24,15 @@
 		<th>State</th>
 		<th>Subscription Type</th>
 		<th>Subscription Depth</th>
+		<th width=100>Filter By</th>
 	</tr>
 
-{% for s in paginator.object_list  %}
+{% autopaginate subscriptions %}
+{% for s in subscriptions  %}
 
 	{% url pubsub.views.entities.details s.entity.entity_id as entity_url %}
 	{% url pubsub.views.nodes.details s.node.node_id as node_url %}
+	{% url pubsub.views.subscriptions.index as subs_url %}
 	<tr>
 		<td><a href="{{ entity_url }}">{{ s.entity.jid }}</a></td>
 		<td>{% if s.resource %}{{ s.resource }}{% endif %}</td>
@@ -35,12 +40,21 @@
 		<td>{{ s.state }}</td>
 		<td>{% if s.subscription_type %}{{ s.subscription_type }}{% endif %}</td>
 		<td>{% if s.subscription_depth %}{{ s.subscription_depth }}{% endif %}</td>
+		<td>
+			{% if 'Entity' not in filters %}
+			<a href="{{ subs_url }}?entity={{ s.entity.entity_id }}">Entity</a>
+			{% endif %}
+			{% if 'Node' not in filters %}
+			<a href="{{ subs_url }}?node={{ s.node.node_id }}">Node</a>
+			{% endif %}
+
+		</td>
 	</tr>
 {% endfor %}
 
 </table>
 
-{% include "paginator_footer.html"%}
+{% paginate %}
 
 {% else %}
 <p>No Subscriptions</p>

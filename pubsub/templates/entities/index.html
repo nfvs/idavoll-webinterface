@@ -1,28 +1,37 @@
 {% extends "base_generic.html" %}
 
+{% load pagination_tags %}
+
 {% block content %}
 <h2>Entities</h2>
 
+{% for k, v in filters.items %}
+<h3>{{ k }}: {{ v }}</h3>
+{% endfor %}
 
 <table>
 	<tr>
 		<th>Entity</th>
 		<th>View Subscriptions</th>
+		<th>View Entities</th>
 	</tr>
 
-{% for e in paginator.object_list  %}
+{% autopaginate entities %}
+{% for e in entities  %}
 	{% url pubsub.views.subscriptions.index as subs_url %}
+	{% url pubsub.views.affiliations.index as affs_url %}
 	
 	<tr>
 		<td>{{ e.jid }}</td>
 		<td><a href="{{ subs_url }}?entity={{ e.entity_id }}">Subscriptions</a></td>
+		<td><a href="{{ affs_url }}?entity={{ e.entity_id }}">Affiliations</a></td>
 	</tr>
 {% endfor %}
 
 </table>
 
 
-{% include "paginator_footer.html"%}
+{% paginate %}
 
 {% endblock %}
 

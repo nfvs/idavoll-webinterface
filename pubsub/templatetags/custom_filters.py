@@ -6,6 +6,19 @@ from django.utils.encoding import force_unicode
 
 register = template.Library()
 
+def update_page(get, args=None):
+    print 'GET: "%s"' % get
+    print 'TYPE: %s' % type(get)
+    """
+    i = get.get('page')
+    if args == "previous":
+        get.update({'page': i+1})
+    else:
+        get.update({'page': i-1})
+    """
+    return get
+
+
 def unordered_list_hl(value, args=None):
     autoescape = None
     """
@@ -99,4 +112,7 @@ def unordered_list_hl(value, args=None):
 unordered_list_hl.is_safe = True
 #unordered_list_hl.needs_autoescape = True
 
+update_page.is_safe = True
+
 register.filter('unordered_list_hl', unordered_list_hl)
+register.filter('update_page', update_page)

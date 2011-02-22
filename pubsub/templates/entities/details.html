@@ -12,9 +12,15 @@
 </fieldset>
 
 <fieldset>
-	<legend>Subscriptions</legend>
+	<legend>View</legend>
 	{% url pubsub.views.subscriptions.index as subs_url %}
-	<a href="{{ subs_url }}?entity={{ entity.entity_id }}">View Subscriptions</a>
+	<dl>
+		<dt>Subscriptions</dt>
+			<dd><a href="{{ subs_url }}?entity={{ entity.entity_id }}">View Subscriptions</a></dd>
+		
+		<dt>Affiliations</dt>
+			<dd><a href="{{ subs_url }}?entity={{ entity.entity_id }}">View Subscriptions</a></dd>
+	</dl>
 </fieldset>
 
 

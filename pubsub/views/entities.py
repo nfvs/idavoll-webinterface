@@ -1,32 +1,16 @@
 from django.shortcuts import render_to_response
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.core.exceptions import ObjectDoesNotExist
+from django.template import RequestContext
 
 from pubsub.models import Entity, Subscription
 
 def index(request):
 
-    entities_list = Entity.objects.all()
-    paginator = Paginator(entities_list, 20)
-
-    request_page = request.GET.get('page', '1')
-    try:
-        page = int(request_page)
-    except ValueError:
-        if isinstance(request_page, basestring) and request_page == 'last':
-            page = paginator.num_pages
-        else:
-            page = 1
-
-    try:
-        entities = paginator.page(page)
-    except (EmptyPage, InvalidPage):
-        entities = paginator.page(entities.num_pages)
-    
-    print entities.object_list
-
+    entities = Entity.objects.all()
     return render_to_response('entities/index.html',
-                              {'paginator': entities})
+                              {'entities': entities},
+                              context_instance=RequestContext(request))
 
 def details(request, entity_id):
     
