@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %}
+
+{% load custom_filters %}
+
+{% block content %}
+<h2>Nodes</h2>
+
+
+
+<ul>
+{{ nodes|unordered_list_hl }}
+</ul>
+
+{% endblock %}

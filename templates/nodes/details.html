@@ -1,0 +1,58 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h2>Node: {{ node.name }}</h2>
+
+<fieldset>
+	<legend>Node</legend>
+	<dl>
+		<dt>Name</dt>
+			<dd>{{ node.name }}</dd>
+	
+		<dt>Node Type</dt>
+			<dd>{{ node.node_type }}</dd>
+		
+		<dt>Collection</dt>
+			<dd>
+				{% if node.collection.name %}
+					{{ node.collection.name }}
+				{% else %}
+					No Collection (Root Node)
+				{% endif%}
+			</dd>
+	
+		{% if node.persist_items %}
+		<dt>Persist Items</dt>
+			<dd>{{ node.persist_items }}</dd>
+		{% endif %}
+		
+		{% if node.deliver_payloads %}
+		<dt>Deliver Payloads</dt>
+			<dd>{{ node.deliver_payloads }}</dd>
+		{% endif %}
+	
+		{% if node.send_last_published_item %}
+		<dt>Send Last Published Item</dt>
+			<dd>{{ node.send_last_published_item }}</dd>
+		{% endif %}
+	</dl>
+</fieldset>
+
+<fieldset>
+	<legend>Owners</legend>
+	<dl>
+	{% for owner in owners %}
+		<dt>JID</dt>
+		<dl>{{ owner.entity.jid}}</dl>
+	{% endfor %}
+	</dl>
+</fieldset>
+
+<fieldset>
+	<dl>
+		<dt>Number of Subscribers</dt>
+		<dl>{{ num_subscribers }}</dl>
+	</dl>
+</fieldset>
+
+{% endblock %}

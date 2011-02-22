@@ -11,9 +11,11 @@ class Entity(models.Model):
 
 class Node(models.Model):
     node_id = models.IntegerField(primary_key=True)
-    node = models.CharField(max_length=999)
+    name = models.CharField(max_length=999, unique=True, db_column='node')
     node_type = models.CharField(max_length=999)
-    collection = models.CharField(max_length=999)
+    #collection = models.CharField(max_length=999)
+    collection = models.ForeignKey('self',
+                                   db_column='collection')
     persist_items = models.BooleanField()
     deliver_payloads = models.BooleanField()
     send_last_published_item = models.CharField(max_length=999)
@@ -24,8 +26,8 @@ class Node(models.Model):
 
 class Affiliation(models.Model):
     affiliation_id = models.IntegerField(primary_key=True)
-    entity = models.ForeignKey(Entity)
-    node = models.ForeignKey(Node)
+    entity = models.ForeignKey(Entity, db_column='entity_id')
+    node = models.ForeignKey(Node, db_column='node_id')
     affiliation = models.CharField(max_length=999)
 
     class Meta:
@@ -36,7 +38,7 @@ class Subscription(models.Model):
     subscription_id = models.IntegerField(primary_key=True)
     entity = models.ForeignKey(Entity)
     resource = models.TextField(max_length=999)
-    node = models.ForeignKey('nodes.Node')
+    node = models.ForeignKey(Node)
     state = models.TextField(max_length=999)
     subscription_type = models.TextField(max_length=999)
     subscription_depth = models.TextField(max_length=999)

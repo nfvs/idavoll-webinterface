@@ -1,0 +1,43 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h2>Affiliations</h2>
+
+
+<table>
+	<tr>
+		<th>Entity</th>
+		<th>Node</th>
+		<th>Affiliation</th>
+	</tr>
+
+{% for a in affiliations.object_list  %}
+	<tr>
+		<td>{{ a.entity.jid }}</td>
+		<td>{{ a.node.node }}</td>
+		<td>{{ a.affiliation }}</td>
+	</tr>
+{% endfor %}
+
+</table>
+
+
+<div class="pagination">
+    <span class="step-links">
+        {% if affiliations.has_previous %}
+            <a href="?page={{ affiliations.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ affiliations.number }} of {{ affiliations.paginator.num_pages }}.
+        </span>
+
+        {% if affiliations.has_next %}
+            <a href="?page={{ affiliations.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+
+{% endblock %}
+
+
