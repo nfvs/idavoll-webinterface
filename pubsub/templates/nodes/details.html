@@ -39,11 +39,15 @@
 </fieldset>
 
 <fieldset>
-	<legend>Owners</legend>
+	<legend>Affiliations</legend>
 	<dl>
-	{% for owner in owners %}
+	{% for a in affiliations %}
+		{% url pubsub.views.entities.details a.entity.entity_id as ent_url %}
 		<dt>JID</dt>
-		<dl>{{ owner.entity.jid}}</dl>
+		<dd><a href="{{ ent_url }}">{{ a.entity.jid }}</a></dd>
+		
+		<dt>Affiliation</dt>
+		<dd>{{ a.affiliation }}</dd>
 	{% endfor %}
 	</dl>
 </fieldset>
@@ -52,8 +56,12 @@
 	<legend>Subscribers</legend>
 	<dl>
 		<dt>Number of Subscribers</dt>
-		<dl>{{ num_subscribers }}</dl>
+			<dd>{{ num_subscribers }}</dd>
+		
+		{% url pubsub.views.subscriptions.index as subs_url %}
+		<dt><a href="{{ subs_url }}?node={{ node.node_id }}">View Subscribers</a></dt>
 	</dl>
+	
 </fieldset>
 
 {% endblock %}

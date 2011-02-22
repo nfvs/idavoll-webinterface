@@ -14,9 +14,11 @@
         {% block sidebar %}
         <ul>
             <li><a href="/pubsub">Home</a></li>
-			<li><a href="/pubsub/nodes">Nodes</a></li>
-			<li><a href="/pubsub/items">Items</a></li>
-			<li><a href="/pubsub/affiliations">Affiliations</a></li>
+			<li><a href="{% url pubsub.views.nodes.index %}">Nodes</a></li>
+			<li><a href="">Items</a></li>
+			<li><a href="{% url pubsub.views.entities.index %}">Entities</a></li>
+			<li><a href="{% url pubsub.views.subscriptions.index %}">Subscriptions</a></li>
+			<li><a href="{% url pubsub.views.affiliations.index %}">Affiliations</a></li>
         </ul>
         {% endblock %}
     </div>

@@ -10,7 +10,7 @@ from django.http import HttpResponse
 
 def index(request):
 
-	affiliation_list = Affiliation.objects.order_by('entity__jid', 'node__node')
+	affiliation_list = Affiliation.objects.order_by('entity__jid', 'node__name')
 	paginator = Paginator(affiliation_list, 20)
 
 	request_page = request.GET.get('page', '1')
@@ -28,4 +28,4 @@ def index(request):
 		affiliations = paginator.page(paginator.num_pages)
 
 	return render_to_response('affiliations/index.html',
-							  {'affiliations': affiliations})
+							  {'paginator': affiliations})

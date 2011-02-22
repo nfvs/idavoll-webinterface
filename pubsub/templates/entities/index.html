@@ -1,0 +1,29 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h2>Entities</h2>
+
+
+<table>
+	<tr>
+		<th>Entity</th>
+		<th>View Subscriptions</th>
+	</tr>
+
+{% for e in paginator.object_list  %}
+	{% url pubsub.views.subscriptions.index as subs_url %}
+	
+	<tr>
+		<td>{{ e.jid }}</td>
+		<td><a href="{{ subs_url }}?entity={{ e.entity_id }}">Subscriptions</a></td>
+	</tr>
+{% endfor %}
+
+</table>
+
+
+{% include "paginator_footer.html"%}
+
+{% endblock %}
+
+

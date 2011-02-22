@@ -30,11 +30,10 @@ def index(request):
 
 def details(request, node_id):
     node = Node.objects.get(pk=node_id)
-    owners = Affiliation.objects.filter(affiliation='owner',
-                                        node=node.node_id)
+    affiliations = Affiliation.objects.filter(node=node.node_id)
     
     num_subscribers = Subscription.objects.filter(node=node.node_id).count()
     return render_to_response('nodes/details.html',
-                              {'node': node, 'owners': owners,
+                              {'node': node, 'affiliations': affiliations,
                                'num_subscribers': num_subscribers})
 

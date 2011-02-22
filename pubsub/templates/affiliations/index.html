@@ -11,10 +11,13 @@
 		<th>Affiliation</th>
 	</tr>
 
-{% for a in affiliations.object_list  %}
+{% for a in paginator.object_list  %}
+	{% url pubsub.views.entities.details a.entity.entity_id as entity_url %}
+	{% url pubsub.views.nodes.details a.node.node_id as node_url %}
+	
 	<tr>
-		<td>{{ a.entity.jid }}</td>
-		<td>{{ a.node.node }}</td>
+		<td><a href="{{ entity_url }}">{{ a.entity.jid }}</a></td>
+		<td><a href="{{ node_url }}">{{ a.node.name }}</a></td>
 		<td>{{ a.affiliation }}</td>
 	</tr>
 {% endfor %}
@@ -22,21 +25,7 @@
 </table>
 
 
-<div class="pagination">
-    <span class="step-links">
-        {% if affiliations.has_previous %}
-            <a href="?page={{ affiliations.previous_page_number }}">previous</a>
-        {% endif %}
-
-        <span class="current">
-            Page {{ affiliations.number }} of {{ affiliations.paginator.num_pages }}.
-        </span>
-
-        {% if affiliations.has_next %}
-            <a href="?page={{ affiliations.next_page_number }}">next</a>
-        {% endif %}
-    </span>
-</div>
+{% include "paginator_footer.html"%}
 
 {% endblock %}
 

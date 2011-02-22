@@ -11,4 +11,11 @@
 	</dl>
 </fieldset>
 
+<fieldset>
+	<legend>Subscriptions</legend>
+	{% url pubsub.views.subscriptions.index as subs_url %}
+	<a href="{{ subs_url }}?entity={{ entity.entity_id }}">View Subscriptions</a>
+</fieldset>
+
+
 {% endblock %}
