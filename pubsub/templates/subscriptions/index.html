@@ -1,0 +1,54 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h2>Subscriptions</h2>
+
+
+<table>
+	<tr>
+		<th>Entity</th>
+		<th>Resource</th>
+		<th>Node</th>
+		<th>State</th>
+		<th>Subscription Type</th>
+		<th>Subscription Depth</th>
+	</tr>
+
+{% for s in subscriptions.object_list  %}
+
+	{% url pubsub.views.entities.details s.entity.entity_id as entity_url %}
+	{% url pubsub.views.nodes.details s.node.node_id as node_url %}
+	<tr>
+		<td><a href="{{ entity_url }}">{{ s.entity.jid }}</a></td>
+		<td>{{ s.resource }}</td>
+		<td><a href="{{ node_url }}">{{ s.node.name }}</a></td>
+		<td>{{ s.state }}</td>
+		<td>{{ s.subscription_type }}</td>
+		<td>{{ s.subscription_depth }}</td>
+	</tr>
+{% endfor %}
+
+</table>
+
+
+{% if Subscriptions.number %}
+<div class="pagination">
+    <span class="step-links">
+        {% if Subscriptions.has_previous %}
+            <a href="?page={{ Subscriptions.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ Subscriptions.number }} of {{ Subscriptions.paginator.num_pages }}.
+        </span>
+
+        {% if Subscriptions.has_next %}
+            <a href="?page={{ Subscriptions.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+{% endif %}
+
+{% endblock %}
+
+

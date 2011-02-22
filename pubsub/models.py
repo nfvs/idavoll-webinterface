@@ -36,9 +36,9 @@ class Affiliation(models.Model):
 
 class Subscription(models.Model):
     subscription_id = models.IntegerField(primary_key=True)
-    entity = models.ForeignKey(Entity)
+    entity = models.ForeignKey(Entity, db_column='entity_id')
     resource = models.TextField(max_length=999)
-    node = models.ForeignKey(Node)
+    node = models.ForeignKey(Node, db_column='node_id')
     state = models.TextField(max_length=999)
     subscription_type = models.TextField(max_length=999)
     subscription_depth = models.TextField(max_length=999)

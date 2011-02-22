@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h2>Entity: {{ entity.jid }}</h2>
+
+<fieldset>
+	<legend>Entity</legend>
+	<dl>
+		<dt>JID</dt>
+			<dd>{{ entity.jid }}</dd>
+	</dl>
+</fieldset>
+
+{% endblock %}

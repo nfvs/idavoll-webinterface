@@ -1,10 +1,14 @@
 from django.conf.urls.defaults import *
 
 urlpatterns = patterns('pubsub.views',
-    (r'^nodes/$', 'nodes_index'),
-    (r'^nodes/(?P<node_id>\d+)/$', 'nodes_details'),
+    (r'nodes/$', 'nodes.index'),
+    (r'nodes/(?P<node_id>\d+)/$', 'nodes.details'),
 
-    (r'entities/$', 'entities_index'),
-    (r'affiliations/$', 'affiliations_index'),
+    (r'entities/$', 'entities.index'),
+    (r'entities/(?P<entity_id>\d+)/$', 'entities.details'),
+    
+    (r'affiliations/$', 'affiliations.index'),
+    
+    (r'subscriptions/$', 'subscriptions.index'),
 )
 
