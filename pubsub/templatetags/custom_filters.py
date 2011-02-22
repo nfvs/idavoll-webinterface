@@ -6,7 +6,8 @@ from django.utils.encoding import force_unicode
 
 register = template.Library()
 
-def unordered_list_hl(value, autoescape=None, hl=None):
+def unordered_list_hl(value, args=None):
+    autoescape = None
     """
     Recursively takes a self-nested list and returns an HTML unordered list --
     WITHOUT opening and closing <ul> tags.
@@ -27,6 +28,10 @@ def unordered_list_hl(value, autoescape=None, hl=None):
         </ul>
         </li>
     """
+    arg_list = [arg for arg in args.split(',')]
+    arg_name = arg_list[0]
+    arg_id = arg_list[1]
+    
     if autoescape:
         from django.utils.html import conditional_escape
         escaper = conditional_escape
@@ -64,7 +69,11 @@ def unordered_list_hl(value, autoescape=None, hl=None):
         list_length = len(list_)
         i = 0
         while i < list_length:
-            title = list_[i]
+            # NFVS
+            #title = list_[i]
+            title_n = getattr(list_[i], arg_name)
+            title_i = getattr(list_[i], arg_id)
+            title = '<a href="%s/">%s</a>' % (title_i, title_n)
             sublist = ''
             sublist_item = None
             if isinstance(title, (list, tuple)):
@@ -88,6 +97,6 @@ def unordered_list_hl(value, autoescape=None, hl=None):
     value, converted = convert_old_style_list(value)
     return mark_safe(_helper(value))
 unordered_list_hl.is_safe = True
-unordered_list_hl.needs_autoescape = True
+#unordered_list_hl.needs_autoescape = True
 
 register.filter('unordered_list_hl', unordered_list_hl)

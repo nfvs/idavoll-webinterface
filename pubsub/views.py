@@ -19,7 +19,7 @@ def nodes_index(request):
 		b = lists.setdefault(n.node_id, [])
 		try:
 		    tmp_id = n.collection.node_id
-		    lists.setdefault(n.collection.node_id, []).extend([n.name, b])
+		    lists.setdefault(n.collection.node_id, []).extend([n, b])
 		# skip fake root node (collection.node_id=-1, inexisting)
 		except ObjectDoesNotExist:
 		    continue
