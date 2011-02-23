@@ -13,13 +13,27 @@
 
 <fieldset>
 	<legend>View</legend>
+	{% url pubsub.views.affiliations.index as affs_url %}
 	{% url pubsub.views.subscriptions.index as subs_url %}
 	<dl>
 		<dt>Subscriptions</dt>
-			<dd><a href="{{ subs_url }}?entity={{ entity.entity_id }}">View Subscriptions</a></dd>
+			<dd>
+			{% if subscriptions_count > 0 %}
+			<a href="{{ subs_url }}?entity={{ entity.entity_id }}">{{ subscriptions_count }}</a>
+			{% else %}
+			0
+			{% endif %}
+			</dd>
 		
 		<dt>Affiliations</dt>
-			<dd><a href="{{ subs_url }}?entity={{ entity.entity_id }}">View Subscriptions</a></dd>
+			<dd>
+			{% if affiliations_count > 0 %}
+			<a href="{{ affs_url }}?entity={{ entity.entity_id }}">{{ affiliations_count }}</a>
+			{% else %}
+			0
+			{% endif %}
+			</dd>
+
 	</dl>
 </fieldset>
 

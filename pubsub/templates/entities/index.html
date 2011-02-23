@@ -13,18 +13,33 @@
 	<tr>
 		<th>Entity</th>
 		<th>Subscriptions</th>
-		<th>View Entities</th>
+		<th>Affiliations</th>
 	</tr>
 
 {% autopaginate entities %}
 {% for e in entities  %}
+	{% url pubsub.views.entities.details e.entity_id as ent_url %}
 	{% url pubsub.views.subscriptions.index as subs_url %}
 	{% url pubsub.views.affiliations.index as affs_url %}
 
 	<tr class="{% cycle 'odd' 'even' %}">
-		<td>{{ e.jid }}</td>
-		<td><a href="{{ subs_url }}?entity={{ e.entity_id }}">Subscriptions</a></td>
-		<td><a href="{{ affs_url }}?entity={{ e.entity_id }}">Affiliations</a></td>
+		<td>
+			<a href="{{ ent_url }}">{{ e.jid }}</a>
+		</td>
+		<td>
+			{% if e.subscriptions_count > 0 %}
+			<a href="{{ subs_url }}?entity={{ e.entity_id }}">{{ e.subscriptions_count }}</a>
+			{% else %}
+			0
+			{% endif %}
+		</td>
+		<td>
+			{% if e.affiliations_count > 0 %}
+			<a href="{{ affs_url }}?entity={{ e.entity_id }}">{{ e.affiliations_count }}</a>
+			{% else %}
+			0
+			{% endif %}
+		</td>
 	</tr>
 {% endfor %}
 
