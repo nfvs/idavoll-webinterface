@@ -12,7 +12,7 @@
 <table>
 	<tr>
 		<th>Entity</th>
-		<th>View Subscriptions</th>
+		<th>Subscriptions</th>
 		<th>View Entities</th>
 	</tr>
 
@@ -20,8 +20,8 @@
 {% for e in entities  %}
 	{% url pubsub.views.subscriptions.index as subs_url %}
 	{% url pubsub.views.affiliations.index as affs_url %}
-	
-	<tr>
+
+	<tr class="{% cycle 'odd' 'even' %}">
 		<td>{{ e.jid }}</td>
 		<td><a href="{{ subs_url }}?entity={{ e.entity_id }}">Subscriptions</a></td>
 		<td><a href="{{ affs_url }}?entity={{ e.entity_id }}">Affiliations</a></td>

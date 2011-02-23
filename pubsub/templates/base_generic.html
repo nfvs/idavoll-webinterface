@@ -2,32 +2,32 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <link rel="stylesheet" href="style.css" />
-    <title>{% block title %}PubSub WebInterface (c) 2011 Nuno Santos{% endblock %}</title>
-	
-	<link rel="stylesheet" href="/pubsub/media/css/basic.css">
-
+   <link rel="stylesheet" href="style.css" />
+   <title>{% block title %}PubSub WebInterface (c) 2011 Nuno Santos{% endblock %}</title>
+   <link rel="stylesheet" href="/pubsub/media/css/reset.css">
+   <link rel="stylesheet" href="/pubsub/media/css/basic.css">
 </head>
 
 <body>
-    <div id="sidebar">
-        {% block sidebar %}
-        <ul>
-            <li><a href="/pubsub">Home</a></li>
-			<li><a href="{% url pubsub.views.nodes.index %}">Nodes</a></li>
-			<li><a href="">Items</a></li>
-			<li><a href="{% url pubsub.views.entities.index %}">Entities</a></li>
-			<li><a href="{% url pubsub.views.subscriptions.index %}">Subscriptions</a></li>
-			<li><a href="{% url pubsub.views.affiliations.index %}">Affiliations</a></li>
-        </ul>
-        {% endblock %}
-    </div>
-
-	<div id="header">
-	</div>
-
-    <div id="content">
-        {% block content %}{% endblock %}
-    </div>
+   <div id="header">
+      <h1>PubSub Web Interface</h1>
+   </div>
+   
+   <div id="navigation">
+      {% block sidebar %}
+      <ul>
+         <li><a href="/pubsub">Home</a></li>
+         <li><a href="{% url pubsub.views.nodes.index %}">Nodes</a></li>
+         <li><a href="">Items</a></li>
+         <li><a href="{% url pubsub.views.entities.index %}">Entities</a></li>
+         <li><a href="{% url pubsub.views.subscriptions.index %}">Subscriptions</a></li>
+         <li><a href="{% url pubsub.views.affiliations.index %}">Affiliations</a></li>
+      </ul>
+      {% endblock %}
+   </div>
+  
+   <div id="content">
+   {% block content %}{% endblock %}
+   </div>
 </body>
 </html>
