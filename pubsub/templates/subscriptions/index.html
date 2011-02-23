@@ -1,6 +1,7 @@
 {% extends "base_generic.html" %}
 
 {% load pagination_tags %}
+{% load sorting_tags %}
 
 {% block content %}
 <h2>Subscriptions</h2>
@@ -16,18 +17,20 @@
 
 {% if subscriptions %}
 
+{% autosort subscriptions %}
+{% autopaginate subscriptions %}
+
 <table>
 	<tr>
-		<th>Entity</th>
-		<th>Resource</th>
-		<th>Node</th>
-		<th>State</th>
-		<th>Subscription Type</th>
-		<th>Subscription Depth</th>
+		<th>{% anchor entity__jid Entity %}</th>
+		<th>{% anchor resource Resource %}</th>
+		<th>{% anchor node__name Node %}</th>
+		<th>{% anchor state State %}</th>
+		<th>{% anchor subscription_type 'Subscription Type' %}</th>
+		<th>{% anchor subscription_depth 'Subscription Depth' %}</th>
 		<th width=100>Filter By</th>
 	</tr>
 
-{% autopaginate subscriptions %}
 {% for s in subscriptions  %}
 
 	{% url pubsub.views.entities.details s.entity.entity_id as entity_url %}

@@ -1,6 +1,7 @@
 {% extends "base_generic.html" %}
 
 {% load pagination_tags %}
+{% load sorting_tags %}
 
 {% block content %}
 <h2>Entities</h2>
@@ -9,14 +10,16 @@
 <h3>{{ k }}: {{ v }}</h3>
 {% endfor %}
 
+{% autosort entities %}
+{% autopaginate entities %}
+
 <table>
 	<tr>
-		<th>Entity</th>
-		<th>Subscriptions</th>
-		<th>Affiliations</th>
+		<th>{% anchor jid Entity %}</th>
+		<th>{% anchor subscriptions_count Subscriptions %}</th>
+		<th>{% anchor affiliations_count Affiliations %}</th>
 	</tr>
 
-{% autopaginate entities %}
 {% for e in entities  %}
 	{% url pubsub.views.entities.details e.entity_id as ent_url %}
 	{% url pubsub.views.subscriptions.index as subs_url %}
