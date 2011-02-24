@@ -1,5 +1,7 @@
 body {font-family:Helvetica,'Helvetica Neue',Arial,sans-serif;color:#1b1d20;font-size:14px;background:#576172 url(/pubsub/media/images/bg-tile.png)}
 
+body, html {height: 100%;}
+
 h1,h2,h3,h4 {font-family:'Helvetica Neue',Helvetica,Arial,sans-serif}
 h1 {font-size:3em;color:#eee;text-shadow:0px 1px 0px #000;font-weight:bold}
 h2 {font-size:1.7em;color:#eee;text-shadow:0px 1px 1px #1b2434}
@@ -29,10 +31,23 @@ tr.odd {background:#6c7687}
 tr:hover {background:#687282}
 th {font-weight:bold;color:#4D5660;font-size:1.1em;border-bottom:2px solid #606b7b}
 
+
+#content
+{
+	padding-bottom: 72px;
+}
+#container
+{
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	clear: both;
+	margin-bottom: -72px;
+}
+
 #footer
 {
     position: relative;
-    margin-bottom: 0px;
     background:url(/pubsub/media/images/bg-header.png);padding:5px 0px;
     margin-top: 30px;
 }
