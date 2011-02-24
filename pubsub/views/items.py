@@ -1,12 +1,18 @@
+import types
+import json
+
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.core.exceptions import ObjectDoesNotExist
+from django.core import serializers
+
 
 from couchdbkit.ext.django.loading import get_db
 from couchdbkit import ResourceNotFound
 from couchdbkit.ext.django.schema import *
 
 from pubsub.models import Item, Node
+
 
 def convert_bytes(bytes):
     bytes = float(bytes)
@@ -28,7 +34,7 @@ def convert_bytes(bytes):
 
 def index(request):
 
-    info = get_db('pubsub').info()    
+    info = get_db('pubsub').info()
     info['disk_size'] = convert_bytes(info['disk_size'])
     
     node_id = request.GET.get('node')
@@ -67,13 +73,43 @@ def index(request):
                               
                               
 def details(request, item_id=None):
+    
+    def dictToXml(d):
+        ret = '<item'
+        for k, v in d['item']['attribs'].iteritems():
+            ret += ' %s="%s"' % (k, v)
+        ret += '>'
+        ret += _dictToXml(d['item']['value'])
+        ret += '</item>'
+        return ret
+            
+    def _dictToXml(itemlist):
+        ret = ''
+        if not isinstance(itemlist, (dict, list)):
+            return itemlist
+        
+        for i in itemlist:
+            for k,v in dict(i).iteritems():
+                ret += '<%s' % k
+                if 'attribs' in v:
+                    for attn, attv in v['attribs'].iteritems():
+                        ret += ' %s="%s"' % (attn, attv)
+                ret += '>'
+                ret += _dictToXml(v['value'])
+                ret += '</%s>' % k
+        return ret
 
     try:
+        
         item = Item.get(item_id)
+        data = dict(item.data)
+        xml_data = dictToXml(data)
+
     except ResourceNotFound:
         item = None
     
     return render_to_response('items/details.html',
-                              {'item': item},
+                              {'item': item,
+                               'xml_data': xml_data},
                               context_instance=RequestContext(request))
     

@@ -57,12 +57,14 @@
 
 	<fieldset>
 		<legend>Subscribers</legend>
+		{% url pubsub.views.subscriptions.index as subs_url %}
 		<dl>
 			<dt>Number of Subscribers</dt>
 			<dd><a href="{{ subs_url }}?node={{ node.node_id }}">{{ num_subscribers }} Subscriber(s)</a></dd>
 		</dl>
 	</fieldset>
 	
+	{% if node.node_type == 'leaf' %}
 	<fieldset>
 		<legend>Items</legend>
 		<dl>
@@ -70,8 +72,9 @@
 			<dt>View Items</dt>
 			<dd><a href="{{ items_url }}?node={{ node.node_id }}">Items</a></dd>
 		</dl>
-		
 	</fieldset>
+	{% endif %}
+	
 {% else %}
 <h2>Node not found</h2>
 {% endif %}

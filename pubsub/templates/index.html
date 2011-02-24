@@ -1,0 +1,28 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<h2>Idavoll XMPP PubSub Web Interface</h2>
+
+<fieldset>
+	<legend>Statistics</legend>
+	
+	<dl>
+		<dt>Number of Nodes</dt>
+			<dl><a href="{% url pubsub.views.nodes.index %}">{{ num_nodes }}</a></dl>
+		
+		<dt>Number of Items</dt>
+			<dl><a href="{% url pubsub.views.items.index %}">{{ num_items }}</a></dl>
+		
+		<dt>Number of Entities</dt>
+			<dl><a href="{% url pubsub.views.entities.index %}">{{ num_entities }}</a></dl>
+		
+		<dt>Number of Subscriptions</dt>
+			<dl><a href="{% url pubsub.views.subscriptions.index %}">{{ num_subscriptions }}</a></dl>
+		
+		<dt>Number of Affiliations</dt>
+			<dl><a href="{% url pubsub.views.affiliations.index %}">{{ num_affiliations }}</a></dl>
+	</dl>
+</fieldset>
+
+{% endblock %}

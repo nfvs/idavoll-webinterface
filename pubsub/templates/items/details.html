@@ -17,12 +17,21 @@
 		
 	<dt>Date Published</dt>
 		<dd>{{ item.date }}</dd>
-	
-	<dt>Item</dt>
-		<dd>{{ item.data }}</dd>
-	
-	
 </dl>
+
+<h4>Item Data</h4>
+
+<link rel="stylesheet" href="{{ MEDIA_URL }}css/XMLDisplay.css">
+<script type="text/javascript" src="{{ MEDIA_URL }}js/XMLDisplay.js"></script>
+<div id="XMLHolder">
+	
+{% autoescape off %}
+<script>LoadXMLString('XMLHolder', '{{ xml_data }}')</script>
+{% endautoescape %}
+
+</div>
+
+
 
 {% else %}
 	<p>Item not found.</p>
