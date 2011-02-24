@@ -42,11 +42,12 @@ th {font-weight:bold;color:#4D5660;font-size:1.1em;border-bottom:2px solid #606b
 	height: auto !important;
 	height: 100%;
 	clear: both;
-	margin-bottom: -72px;
+	margin-bottom: -70px;
 }
 
 #footer
 {
+	height: 30px;
     position: relative;
     background:url(/pubsub/media/images/bg-header.png);padding:5px 0px;
     margin-top: 30px;
@@ -54,6 +55,7 @@ th {font-weight:bold;color:#4D5660;font-size:1.1em;border-bottom:2px solid #606b
 
 #footer p
 {
+	font-size: 13px;
     text-decoration: none;
     color:#eee;
     text-align: center;
