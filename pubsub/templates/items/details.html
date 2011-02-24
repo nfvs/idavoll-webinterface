@@ -1,0 +1,31 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h2>Item</h2>
+
+{% if item %}
+
+<dl>
+	<dt>ID</dt>
+		<dd>{{ item.item_id }}</dd>
+
+	<dt>Node</dt>
+		<dd>{{ item.node }}</dd>
+		
+	<dt>Publisher</dt>
+		<dd>{{ item.publisher }}</dd>
+		
+	<dt>Date Published</dt>
+		<dd>{{ item.date }}</dd>
+	
+	<dt>Item</dt>
+		<dd>{{ item.data }}</dd>
+	
+	
+</dl>
+
+{% else %}
+	<p>Item not found.</p>
+{% endif %}
+
+{% endblock %}

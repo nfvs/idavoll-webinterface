@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h2>Items</h2>
+
+<dl>
+	<dt>Number of Items</dt>
+	<dd>{{ info.doc_count }}</dd>
+	
+	<dt>Disk Size</dt>
+	<dd>{{ info.disk_size }}</dd>
+</dl>
+
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h2>Items</h2>
+
+{% if not error %}
+
+	<h3>Node: {{ node_name }}</h3>
+	
+	<table>
+		<tr>
+			<th>Publisher</th>
+			<th>Date</th>
+			<th>Item Details</th>
+		</tr>
+	{% for i in items %}
+		{% url pubsub.views.items.details i.item_id as item_url %}
+		<tr>
+			<td>{{ i.publisher }}</td>
+			<td>{{ i.date }}</td>
+			<td><a href="{{ item_url }}">{{ i.item_id }}</a></td>
+		</tr>
+	{% endfor %}
+	</table>
+
+{% else %}
+
+	{% if error == 'node_not_found' %}
+		<h3>Node not found</h3>
+	
+	{% else %}
+		{% if error == 'collection' %}
+			<h3>Node '{{ node_name }}' is a collection node, it has no items</h3>
+		{% endif %}
+	{% endif %}
+
+{% endif %}
+
+{% endblock %}

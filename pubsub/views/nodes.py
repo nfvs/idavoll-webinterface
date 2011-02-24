@@ -1,6 +1,7 @@
 from django.shortcuts import render_to_response
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.core.exceptions import ObjectDoesNotExist
+from django.template import RequestContext
 
 from pubsub.models import Node, Affiliation, Subscription
 
@@ -25,15 +26,23 @@ def index(request):
 		if not lists[n.node_id]:
 			lists[n.collection.node_id].remove(lists[n.node_id])
 
-	return render_to_response('nodes/index.html', {'nodes': lists[0]})
+	return render_to_response('nodes/index.html',
+	                          {'nodes': lists[0]},
+	                          context_instance=RequestContext(request))
 
 
 def details(request, node_id):
-    node = Node.objects.get(pk=node_id)
-    affiliations = Affiliation.objects.filter(node=node.node_id)
-    
-    num_subscribers = Subscription.objects.filter(node=node.node_id).count()
+    try:
+        node = Node.objects.get(pk=node_id)
+        affiliations = Affiliation.objects.filter(node=node.node_id)
+        num_subscribers = Subscription.objects.filter(node=node.node_id).count()
+    except ObjectDoesNotExist:
+        node = None
+        affiliations = []
+        num_subscribers = 0
+        
     return render_to_response('nodes/details.html',
                               {'node': node, 'affiliations': affiliations,
-                               'num_subscribers': num_subscribers})
+                               'num_subscribers': num_subscribers},
+                              context_instance=RequestContext(request))
 

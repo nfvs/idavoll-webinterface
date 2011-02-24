@@ -7,6 +7,7 @@ A Django-based web interface for Idavoll.
 
 * [django-pagination](http://github.com/ericflo/django-pagination)
 * [django-sorting](http://github.com/directeur/django-sorting)
+* [couchdbkit](http://github.com/benoitc/couchdbkit)
 
 
 ## Contact

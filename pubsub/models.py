@@ -1,5 +1,7 @@
 from django.db import models
 
+from couchdbkit.ext.django.schema import *
+
 
 class Entity(models.Model):
     entity_id = models.IntegerField(primary_key=True)
@@ -7,6 +9,7 @@ class Entity(models.Model):
 
     class Meta:
         db_table = 'entities'
+        managed = False
 
 
 class Node(models.Model):
@@ -22,7 +25,7 @@ class Node(models.Model):
 
     class Meta:
         db_table = 'nodes'
-
+        managed = False
 
 class Affiliation(models.Model):
     affiliation_id = models.IntegerField(primary_key=True)
@@ -32,6 +35,7 @@ class Affiliation(models.Model):
 
     class Meta:
         db_table = 'affiliations'
+        managed = False
 
 
 class Subscription(models.Model):
@@ -45,15 +49,13 @@ class Subscription(models.Model):
 
     class Meta:
         db_table = 'subscriptions'
+        managed = False
 
 
-class Items(models.Model):
-    item_id = models.IntegerField(primary_key=True)
-    node = models.ForeignKey(Node)
-    item = models.CharField(max_length=999)
-    publisher = models.CharField(max_length=999)
-    data = models.CharField(max_length=9999)
-    date = models.DateField()
-
-    class Meta:
-        db_table = 'items'
+class Item(Document):
+    doc_type = 'item'
+    item_id = StringProperty()
+    node = StringProperty()
+    publisher = StringProperty()
+    content = DictProperty()
+    date = DateTimeProperty()

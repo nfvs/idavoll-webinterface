@@ -1,7 +1,5 @@
 from django.shortcuts import render_to_response
 from django.db.models import Count
-from django.core.paginator import Paginator, InvalidPage, EmptyPage
-from django.core.exceptions import ObjectDoesNotExist
 from django.template import RequestContext
 
 from pubsub.models import Entity, Subscription, Affiliation

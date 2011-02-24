@@ -1,68 +1,79 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<h2>Node: {{ node.name }}</h2>
 
-<fieldset>
-	<legend>Node</legend>
-	<dl>
-		<dt>Name</dt>
-			<dd>{{ node.name }}</dd>
-	
-		<dt>Node Type</dt>
-			<dd>{{ node.node_type }}</dd>
-		
-		<dt>Collection</dt>
-			<dd>
-				{% if node.collection.name %}
-					{% url pubsub.views.nodes.details node.collection.node_id as col_url %}
-					<a href="{{ col_url }}">{{ node.collection.name }}</a>
-				{% else %}
-					No Collection (Root Node)
-				{% endif%}
-			</dd>
-	
-		{% if node.persist_items %}
-		<dt>Persist Items</dt>
-			<dd>{{ node.persist_items }}</dd>
-		{% endif %}
-		
-		{% if node.deliver_payloads %}
-		<dt>Deliver Payloads</dt>
-			<dd>{{ node.deliver_payloads }}</dd>
-		{% endif %}
-	
-		{% if node.send_last_published_item %}
-		<dt>Send Last Published Item</dt>
-			<dd>{{ node.send_last_published_item }}</dd>
-		{% endif %}
-	</dl>
-</fieldset>
+{% if node %}
+	<h2>Node: {{ node.name }}</h2>
 
-<fieldset>
-	<legend>Affiliations</legend>
-	<dl>
-	{% for a in affiliations %}
-		{% url pubsub.views.entities.details a.entity.entity_id as ent_url %}
-		<dt>JID</dt>
-		<dd><a href="{{ ent_url }}">{{ a.entity.jid }}</a></dd>
-		
-		<dt>Affiliation</dt>
-		<dd>{{ a.affiliation }}</dd>
-	{% endfor %}
-	</dl>
-</fieldset>
-
-<fieldset>
-	<legend>Subscribers</legend>
-	<dl>
-		<dt>Number of Subscribers</dt>
-			<dd>{{ num_subscribers }}</dd>
-		
-		{% url pubsub.views.subscriptions.index as subs_url %}
-		<dt><a href="{{ subs_url }}?node={{ node.node_id }}">View Subscribers</a></dt>
-	</dl>
+	<fieldset>
+		<legend>Node</legend>
+		<dl>
+			<dt>Name</dt>
+				<dd>{{ node.name }}</dd>
 	
-</fieldset>
+			<dt>Node Type</dt>
+				<dd>{{ node.node_type }}</dd>
+		
+			<dt>Collection</dt>
+				<dd>
+					{% if node.collection.name %}
+						{% url pubsub.views.nodes.details node.collection.node_id as col_url %}
+						<a href="{{ col_url }}">{{ node.collection.name }}</a>
+					{% else %}
+						No Collection (Root Node)
+					{% endif%}
+				</dd>
+	
+			{% if node.persist_items %}
+			<dt>Persist Items</dt>
+				<dd>{{ node.persist_items }}</dd>
+			{% endif %}
+		
+			{% if node.deliver_payloads %}
+			<dt>Deliver Payloads</dt>
+				<dd>{{ node.deliver_payloads }}</dd>
+			{% endif %}
+	
+			{% if node.send_last_published_item %}
+			<dt>Send Last Published Item</dt>
+				<dd>{{ node.send_last_published_item }}</dd>
+			{% endif %}
+		</dl>
+	</fieldset>
+
+	<fieldset>
+		<legend>Affiliations</legend>
+		<dl>
+		{% for a in affiliations %}
+			{% url pubsub.views.entities.details a.entity.entity_id as ent_url %}
+			<dt>JID</dt>
+			<dd><a href="{{ ent_url }}">{{ a.entity.jid }}</a></dd>
+		
+			<dt>Affiliation</dt>
+			<dd>{{ a.affiliation }}</dd>
+		{% endfor %}
+		</dl>
+	</fieldset>
+
+	<fieldset>
+		<legend>Subscribers</legend>
+		<dl>
+			<dt>Number of Subscribers</dt>
+			<dd><a href="{{ subs_url }}?node={{ node.node_id }}">{{ num_subscribers }} Subscriber(s)</a></dd>
+		</dl>
+	</fieldset>
+	
+	<fieldset>
+		<legend>Items</legend>
+		<dl>
+			{% url pubsub.views.items.index as items_url  %}
+			<dt>View Items</dt>
+			<dd><a href="{{ items_url }}?node={{ node.node_id }}">Items</a></dd>
+		</dl>
+		
+	</fieldset>
+{% else %}
+<h2>Node not found</h2>
+{% endif %}
 
 {% endblock %}
