@@ -36,7 +36,7 @@ def index(request):
 
     info = get_db('pubsub').info()
     info['disk_size'] = convert_bytes(info['disk_size'])
-    
+
     node_id = request.GET.get('node')
     if node_id:
         try:
@@ -45,16 +45,16 @@ def index(request):
             return render_to_response('items/list.html',
                                       {'error': 'node_not_found'},
                                       context_instance=RequestContext(request))
-                                      
+
         node_type = node.node_type
         node_name = node.name
-        
+
         if node_type == 'collection':
             return render_to_response('items/list.html',
                                       {'error': 'collection',
                                        'node_name': node_name},
-                                      context_instance=RequestContext(request))    
-        
+                                      context_instance=RequestContext(request))
+
         items = Item.view('pubsub/items_by_node_date',
                           startkey=[node_name, {}],
                           endkey=[node_name],
@@ -65,15 +65,15 @@ def index(request):
                                   {'items': items,
                                    'node_name': node_name},
                                   context_instance=RequestContext(request))
-            
-    
+
+
     return render_to_response('items/index.html',
                               {'info': info},
                               context_instance=RequestContext(request))
-                              
-                              
+
+
 def details(request, item_id=None):
-    
+
     def dictToXml(d):
         ret = '<item'
         for k, v in d['item']['attribs'].iteritems():
@@ -82,12 +82,12 @@ def details(request, item_id=None):
         ret += _dictToXml(d['item']['value'])
         ret += '</item>'
         return ret
-            
+
     def _dictToXml(itemlist):
         ret = ''
         if not isinstance(itemlist, (dict, list)):
-            return itemlist
-        
+            return unicode(itemlist)
+
         for i in itemlist:
             for k,v in dict(i).iteritems():
                 ret += '<%s' % k
@@ -100,16 +100,16 @@ def details(request, item_id=None):
         return ret
 
     try:
-        
+
         item = Item.get(item_id)
         data = dict(item.data)
         xml_data = dictToXml(data)
 
     except ResourceNotFound:
         item = None
-    
+
     return render_to_response('items/details.html',
                               {'item': item,
                                'xml_data': xml_data},
                               context_instance=RequestContext(request))
-    
+

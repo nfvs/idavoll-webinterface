@@ -6,7 +6,12 @@
 <h2>Nodes</h2>
 
 <ul>
-{{ nodes|unordered_list_hl:"name,node_id" }}
+
+{% for n in nodes %}
+{% url pubsub.views.nodes.details n.node_id as node_url %}
+<li><a href="{{ node_url }}">{{ n.name }}</a></li>
+{% endfor %}
+
 </ul>
 
 {% endblock %}
