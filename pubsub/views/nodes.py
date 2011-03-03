@@ -8,7 +8,7 @@ from pubsub.models import Node, Affiliation, Subscription
 
 def index(request):
 
-	nodes = Node.objects.all()
+	nodes = Node.objects.all().order_by('name')
 
 	# transform node list in a nested list
 	#lists = {}
