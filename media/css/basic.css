@@ -5,6 +5,8 @@ body, html {height: 100%;}
 h1,h2,h3,h4 {font-family:'Helvetica Neue',Helvetica,Arial,sans-serif}
 h1 {font-size:3em;color:#eee;text-shadow:0px 1px 0px #000;font-weight:bold}
 h2 {font-size:1.7em;color:#eee;text-shadow:0px 1px 1px #1b2434}
+h3 {font-size:1.3em;color:#eee;text-shadow:0px 1px 1px #1b2434}
+h4 {font-size:1.2em;color:#eee;text-shadow:0px 1px 1px #1b2434}
 
 a:link, a:visited {color:#bac1cc;outline:none}
 a:hover {color:#eee}
@@ -27,7 +29,7 @@ a:hover {color:#eee}
 table {margin:5px 0;color:#eee;width:600px}
 th,td {padding:5px 10px;border-bottom:1px solid #606b7b}
 tr {background:#707b8c}
-tr.odd {background:#6c7687}
+tr.even {background:#6c7687}
 tr:hover {background:#687282}
 th {font-weight:bold;color:#4D5660;font-size:1.1em;border-bottom:2px solid #606b7b}
 

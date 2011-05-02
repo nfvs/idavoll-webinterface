@@ -1,27 +1,28 @@
 @charset "utf-8";
 /* CSS Document */
 .Utility {
-		color: black;
+		color: #ccc;
 }	
 .NodeName {
 	font-weight:bold;
-	color: #800080;	
+	/* color: #800080; */
+    color: #eee;
 }
 .AttributeName 
 {
 	font-weight:bold;
-	color: black;
+    color: #ccc;
 }
 .AttributeValue
 {
-	color:blue;
+    color: #ccc;
 }
 .NodeValue
 {
-	color: black;
+    color: #eee;
 }
 .Element {
-	border-left-color:#00FF66;
+	border-left-color:#aaa;
 	border-left-width:thin;
 	border-left-style:solid;
 	padding-top:0px;
@@ -30,8 +31,14 @@
 .Clickable {	
 	font-weight:900;
 	font-size:large;
-	color: #800080;	
+	color: #eee;	
 	cursor:pointer;
 
-	vertical-align:middle;
+	vertical-align:-1px;
+    margin-right: 2px;
+}
+
+#XMLHolder {
+    background:#707b8c;
+    width: 800px;
 }

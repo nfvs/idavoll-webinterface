@@ -5,28 +5,36 @@
 
 {% if item %}
 
-<dl>
-	<dt>ID</dt>
-		<dd>{{ item.item_id }}</dd>
+<table>
+    <tr>
+        <td>ID</td>
+        <td>{{ item.item_id }}</td>
+    </tr>
 
-	<dt>Node</dt>
-		<dd>{{ item.node }}</dd>
-		
-	<dt>Publisher</dt>
-		<dd>{{ item.publisher }}</dd>
-		
-	<dt>Date Published</dt>
-		<dd>{{ item.date }}</dd>
-</dl>
+    <tr class="even">
+        <td>Node</td>
+        <td>{{ item.node }}</td>
+    </tr>
 
-<h4>Item Data</h4>
+    <tr>
+        <td>Publisher</td>
+        <td>{{ item.publisher }}</td>
+    </tr>
+
+    <tr class="even">
+        <td>Date Published</td>
+        <td>{{ item.date }}</td>
+    </tr>
+</table>
+
+<h3>Item Data</h3>
 
 <link rel="stylesheet" href="{{ MEDIA_URL }}css/XMLDisplay.css">
 <script type="text/javascript" src="{{ MEDIA_URL }}js/XMLDisplay.js"></script>
 <div id="XMLHolder">
 	
 {% autoescape off %}
-<script>LoadXMLString('XMLHolder', '{{ xml_data }}')</script>
+<script>LoadXMLString('XMLHolder', "{{ xml_data }}")</script>
 {% endautoescape %}
 
 </div>

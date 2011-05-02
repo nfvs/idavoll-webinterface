@@ -58,4 +58,4 @@ class Item(Document):
     node = StringProperty()
     publisher = StringProperty()
     content = DictProperty()
-    date = DateTimeProperty()
+    date = StringProperty()

@@ -25,7 +25,7 @@
 	{% url pubsub.views.subscriptions.index as subs_url %}
 	{% url pubsub.views.affiliations.index as affs_url %}
 
-	<tr class="{% cycle 'odd' 'even' %}">
+	<tr class="{% cycle 'even' 'odd' %}">
 		<td>
 			<a href="{{ ent_url }}">{{ e.jid }}</a>
 		</td>

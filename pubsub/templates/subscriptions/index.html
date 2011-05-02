@@ -36,14 +36,14 @@
 	{% url pubsub.views.entities.details s.entity.entity_id as entity_url %}
 	{% url pubsub.views.nodes.details s.node.node_id as node_url %}
 	{% url pubsub.views.subscriptions.index as subs_url %}
-	<tr>
+    <tr class="{% cycle 'even' 'odd' %}">
 		<td><a href="{{ entity_url }}">{{ s.entity.jid }}</a></td>
 		<td>{% if s.resource %}{{ s.resource }}{% endif %}</td>
 		<td><a href="{{ node_url }}">{{ s.node.name }}</a></td>
 		<td>{{ s.state }}</td>
 		<td>{% if s.subscription_type %}{{ s.subscription_type }}{% endif %}</td>
 		<td>{% if s.subscription_depth %}{{ s.subscription_depth }}{% endif %}</td>
-		<td>
+        <td>
 			{% if 'Entity' not in filters %}
 			<a href="{{ subs_url }}?entity={{ s.entity.entity_id }}">Entity</a>
 			{% endif %}

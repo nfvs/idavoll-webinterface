@@ -4,25 +4,32 @@
 
 <h2>Idavoll XMPP PubSub Web Interface</h2>
 
-<fieldset>
-	<legend>Statistics</legend>
-	
-	<dl>
-		<dt>Number of Nodes</dt>
-			<dl><a href="{% url pubsub.views.nodes.index %}">{{ num_nodes }}</a></dl>
-		
-		<dt>Number of Items</dt>
-			<dl><a href="{% url pubsub.views.items.index %}">{{ num_items }}</a></dl>
-		
-		<dt>Number of Entities</dt>
-			<dl><a href="{% url pubsub.views.entities.index %}">{{ num_entities }}</a></dl>
-		
-		<dt>Number of Subscriptions</dt>
-			<dl><a href="{% url pubsub.views.subscriptions.index %}">{{ num_subscriptions }}</a></dl>
-		
-		<dt>Number of Affiliations</dt>
-			<dl><a href="{% url pubsub.views.affiliations.index %}">{{ num_affiliations }}</a></dl>
-	</dl>
-</fieldset>
+<br/>
+<table>
+    <tr class=>
+        <td>Number of Nodes</td>
+        <td><a href="{% url pubsub.views.nodes.index %}">{{ num_nodes }}</a></td>
+    </tr>
+
+    <tr class="even">
+        <td>Number of Items</td>
+        <td><a href="{% url pubsub.views.items.index %}">{{ num_items }}</a></td>
+    </tr>
+
+    <tr>
+        <td>Number of Entities</td>
+        <td><a href="{% url pubsub.views.entities.index %}">{{ num_entities }}</a></td>
+    </tr>
+
+    <tr class="even">
+        <td>Number of Subscriptions</td>
+        <td><a href="{% url pubsub.views.subscriptions.index %}">{{ num_subscriptions }}</a></td>
+    </tr>
+
+    <tr>
+        <td>Number of Affiliations</td>
+        <td><a href="{% url pubsub.views.affiliations.index %}">{{ num_affiliations }}</a></td>
+    </tr>
+</table>
 
 {% endblock %}
