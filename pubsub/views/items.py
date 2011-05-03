@@ -115,3 +115,31 @@ def details(request, item_id=None):
                                'xml_data': xml_data},
                               context_instance=RequestContext(request))
 
+def search(request):
+    if not request.POST:
+        return render_to_response('items/search.html',
+                                  {},
+                                  context_instance=RequestContext(request))
+
+    import urllib, httplib
+    import simplejson as json
+
+    url = "/pubsub_items/_fti/_design/pubsub/context?"
+
+    url += "q=%s" % urllib.quote(request.POST.get('query', ""))
+    include_docs = request.POST.get('include_docs', 'false')
+    url += "&include_docs=%s" % urllib.quote(include_docs)
+
+    conn = httplib.HTTPConnection("c3s.av.it.pt:5984")
+    conn.request("GET", url)
+    response = conn.getresponse()
+    r = response.read()
+    data = json.loads(r)
+
+    return render_to_response('items/search.html',
+                              {'data': data,
+                               'include_docs': include_docs,
+                               'query': request.POST.get('query')},
+                               context_instance=RequestContext(request))
+
+

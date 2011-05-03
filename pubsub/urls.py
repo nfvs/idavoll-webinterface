@@ -9,12 +9,13 @@ urlpatterns = patterns('pubsub.views',
 
     (r'entities/$', 'entities.index'),
     (r'entities/(?P<entity_id>\d+)/$', 'entities.details'),
-    
+
     (r'affiliations/$', 'affiliations.index'),
-    
+
     (r'subscriptions/$', 'subscriptions.index'),
-    
+
     (r'items/$', 'items.index'),
     (r'items/details/(?P<item_id>[\w|\W]+)/$', 'items.details'),
+    (r'items/search/$', 'items.search'),
 )
 

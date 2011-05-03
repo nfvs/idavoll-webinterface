@@ -1,4 +1,8 @@
-body {font-family:Helvetica,'Helvetica Neue',Arial,sans-serif;color:#1b1d20;font-size:14px;background:#576172 url(/pubsub/media/images/bg-tile.png)}
+body {
+    font-family:Helvetica,'Helvetica Neue',Arial,sans-serif;
+    /*color:#1b1d20;*/
+    color: #eee;
+    font-size:14px;background:#576172 url(/pubsub/media/images/bg-tile.png)}
 
 body, html {height: 100%;}
 
@@ -61,4 +65,29 @@ th {font-weight:bold;color:#4D5660;font-size:1.1em;border-bottom:2px solid #606b
     text-decoration: none;
     color:#eee;
     text-align: center;
+}
+
+div#search_box
+{
+    margin-top: 10px;
+}
+div#search_box input
+{
+    min-width: 300px;
+    height: 20px;
+    margin-bottom: 10px;
+}
+
+div#info
+{
+    width: 580px;
+    padding: 10px;
+    margin: 5px 0px;
+    background: #707b8c;
+    border: #606B7B solid 1px;
+
+}
+div#info em
+{
+    font-style: italic;
 }

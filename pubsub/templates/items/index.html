@@ -3,6 +3,13 @@
 {% block content %}
 <h2>Items</h2>
 
+
+<br />
+{% url pubsub.views.items.search as search_url %}
+<a href="{{ search_url }}">Items Search</a>
+
+<br />
+<br />
 <table>
     <tr class="even">
         <td>Number of Items</td>
@@ -14,5 +21,6 @@
         <td>{{ info.disk_size }}</td>
     </tr>
 </table>
+
 
 {% endblock %}

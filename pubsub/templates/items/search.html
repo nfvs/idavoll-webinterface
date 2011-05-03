@@ -1,0 +1,66 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h2>Items Search</h2>
+<h3>Powered by Apache Lucene</h3>
+
+<div id="info">
+    <ul>
+        <li>To search in context information, use <em>context:&lt;query&gt;</em> </li>
+        <li>For example: <em>context:mother</em> or <em>context:"how i met your
+            mother"</em></li>
+    </ul>
+</div>
+
+<div id="search_box">
+    <form action="" method="post">
+        <input type="text" name="query" value="{{ query }}"/>
+    </form>
+</div>
+
+{% if data %}
+
+<h3>Result Statistics</h3>
+<table>
+    <tr>
+        <td>Query Limit</td>
+        <td>{{ data.limit }}</td>
+    </tr>
+    <tr class="even">
+        <td>Search Duration</td>
+        <td>{{ data.search_duration }} ms</td>
+    </tr>
+    <tr>
+        <td>Documents Fetch Duration</td>
+        <td>{{ data.fetch_duration }} ms</td>
+    </tr>
+    <tr class="even">
+        <td>Number of results</td>
+        <td>{{ data.total_rows }}</td>
+    </tr>
+</table>
+
+
+<br />
+<h3>Results</h3>
+<table>
+    <tr>
+        <th>DocID</th>
+        <th>Score</th>
+    </tr>
+
+    {% for r in data.rows %}
+    {% url pubsub.views.items.details r.id as node_url %}
+    <tr class="{% cycle 'even' 'odd' %}">
+        <td><a href="{{ node_url }}">{{ r.id }}</a></td>
+        <td>{{ r.score }}</td>
+    </tr>
+
+    {% endfor %}
+
+
+{% endif %}
+
+</table>
+
+{% endblock %}
