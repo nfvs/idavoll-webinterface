@@ -28,4 +28,5 @@ def details(request, entity_id):
     return render_to_response('entities/details.html',
             {'entity': entity,
              'subscriptions_count': subs_count,
-             'affiliations_count': affs_count})
+             'affiliations_count': affs_count},
+             context_instance=RequestContext(request))
